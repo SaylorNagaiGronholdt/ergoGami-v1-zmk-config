@@ -20,4 +20,8 @@
 ---
 include:
   - board: nice_nano_v2
-    shield: two_percent_milk
+    shield: ergoGami_v1
+    settings:
+      # Enable E-ink display
+      nice_view: true
+      nice_view_zephyr_display: true

@@ -1,0 +1,90 @@
+/*
+ * Copyright (c) 2022 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+/ {
+    stick_mouse: behavior_stick_mouse {
+        compatible = "zmk,behavior-stick-mouse";
+        #binding-cells = <0>;
+        x-input = <&x_axis>;  // Matches your overlay
+        y-input = <&y_axis>;  // Matches your overlay
+        sensitivity = <0.6>;  // Adjust speed (0.1-1.5)
+    };
+
+    behaviors {
+        cycle_layers: behavior_layer_cycle {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <1>;
+            bindings = <
+                &macro_param 1 2 3 4>,  // Layers to cycle (L1, L2, L3, L4)
+                &macro_tap &tog_next_layer  // Toggle to next layer in sequence
+            >;
+        };
+
+        hold_right_click: behavior_mouse_hold {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+            bindings = <&mo>, <&mkp RCLK>; // Hold: Right-click | Tap: Right-click
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        l1_layer {
+            bindings = <
+                // Left half (QWERTY)
+                &kp Q     &kp W     &kp E     &kp R     &kp T
+                &kp A     &kp S     &kp D     &kp F     &kp G
+                &kp Z     &kp X     &kp C     &kp V     &kp B
+                &kp LCLK  &mt RCLK stick_mouse         &kp SPACE
+
+                // Right half (QWERTY + stick → mouse)
+                &kp Y     &kp U     &kp I     &kp O     &kp P   
+                &kp H     &kp J     &kp K     &kp L     &kp RSHFT
+                &kp N     &kp M     &kp COMMA &kp DEL   &kp RET
+                &kp RALT  &kp RCTRL
+            >;
+        };
+
+        l2_layer {
+            bindings = <
+                // Navigation layer (example)
+                &kp PG_UP &kp HOME &kp UP   &kp END  &kp INS  &kp NUM_LOCK
+                &kp PG_DN &kp LEFT &kp DOWN &kp RIGHT &kp DEL  &kp C_VOL_UP
+                &kp F1    &kp F2   &kp F3   &kp F4   &kp F5   &kp C_VOL_DN
+                &trans    &trans   &trans   &trans   &trans   &kp C_MUTE
+            >;
+            display-name = "NAV";
+        };
+
+        l3_layer {
+            bindings = <
+            >;
+            display-name = "INT";
+        };
+
+        l4_layer {
+            bindings = <
+            >;
+            display-name = "FOO";
+        }
+    };
+
+    // Mouse behavior for analog stick
+    stick_mouse: behavior_stick_mouse {
+        compatible = "zmk,behavior-stick-mouse";
+        #binding-cells = <0>;
+        x-input = <&x_axis>;
+        y-input = <&y_axis>;
+        sensitivity = <0.8>;  // Adjust cursor speed
+    };
+};
