@@ -1,2 +1,0 @@
-config SHEILD_ERGOGAMI_V1
-    def_bool $(shields_list_contains, ergoGami_v1)
