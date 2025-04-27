@@ -34,6 +34,16 @@
             quick-tap-ms = <0>;
             bindings = <&mo>, <&mkp RCLK>; // Hold: Right-click | Tap: Right-click
         };
+        nice_view_behavior: behavior_nice_view {
+            compatible = "zmk,behavior-nice-view";
+            #binding-cells = <0>;
+            display = <&nice_view>;
+            widgets = <
+                &layer_status
+                &battery_status
+                &output_status
+            >;  
+        };
     };
 
     keymap {
