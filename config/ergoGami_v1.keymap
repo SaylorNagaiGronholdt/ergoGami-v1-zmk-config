@@ -9,16 +9,14 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
-    stick_mouse: behavior_stick_mouse {
-        compatible = "zmk,behavior-stick-mouse";
-        #binding-cells = <0>;
-        x-input = <&x_axis>;  // Matches your overlay
-        y-input = <&y_axis>;  // Matches your overlay
-        sensitivity = <0.6>;  // Adjust speed (0.1-1.5)
-    };
-
     behaviors {
-
+        stick_mouse: behavior_stick_mouse {
+            compatible = "zmk,behavior-stick-mouse";
+            #binding-cells = <0>;
+            x-input = <&x_axis>;  // Matches your overlay
+            y-input = <&y_axis>;  // Matches your overlay
+            sensitivity = <0.6>;  // Adjust speed (0.1-1.5)
+        };
         
         cycle_layers: behavior_layer_cycle {
             compatible = "zmk,behavior-macro";
