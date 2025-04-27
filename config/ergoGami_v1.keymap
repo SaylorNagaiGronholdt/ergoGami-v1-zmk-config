@@ -18,6 +18,8 @@
     };
 
     behaviors {
+
+        
         cycle_layers: behavior_layer_cycle {
             compatible = "zmk,behavior-macro";
             #binding-cells = <1>;
@@ -77,14 +79,5 @@
             >;
             display-name = "FOO";
         }
-    };
-
-    // Mouse behavior for analog stick
-    stick_mouse: behavior_stick_mouse {
-        compatible = "zmk,behavior-stick-mouse";
-        #binding-cells = <0>;
-        x-input = <&x_axis>;
-        y-input = <&y_axis>;
-        sensitivity = <0.8>;  // Adjust cursor speed
     };
 };
