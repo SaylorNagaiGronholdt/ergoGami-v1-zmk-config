@@ -39,6 +39,11 @@
         >;
     };
 
+    // ADC for analog stick
+    &adc {
+        status = "okay";
+    };
+
     // Analog stick (mouse)
     analog_stick: analog_stick {
         compatible = "zmk,analog-stick";
@@ -47,36 +52,35 @@
         sensitivity = <0.8>;
     };
 
-    // ADC for analog stick
-    &adc {
-        status = "okay";
-    };
-
     x_axis: &adc_channel_5 {
-        status = "okay";
-        label = "X_AXIS";
-        io-channels = <&adc 5>;  // AIN5 (P0.29)
+        zephyr,input-channel = <5>;
+        io-channels = <&adc 5>;
+        label = "joystick_x";
+    //      status = "okay";
+    //      label = "X_AXIS";
+    //      io-channels = <&adc 5>;  // AIN5 (P0.29)
     };
 
     y_axis: &adc_channel_0 {
-        status = "okay";
-        label = "Y_AXIS";
-        io-channels = <&adc 0>;  // AIN0 (P0.02)
+        zephyr,input-channel = <0>;
+        io-channels = <&adc 0>;
+        label = "joystick_y";
+    //      status = "okay";
+    //      label = "Y_AXIS";
+    //      io-channels = <&adc 0>;  // AIN0 (P0.02)
     };
 
-    &spi0 {
+    &i2c1 {
         status = "okay";
-        sck-pin = <17>;    // SCK on P0.17
-        mosi-pin = <20>;   // MOSI on P0.20
-        cs-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;  // CS on P0.06
+        sda-pin = <17>;
+        scl-pin = <20>;
+        cs-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
+        clock-frequency = <I2C_BITRATE_FAST>;
 
-        nice_view: nice_view@0 {
-            compatible = "nice,nice_view";
-            reg = <0>;
-            label = "NICE_VIEW";
-            width = <128>;
-            height = <32>;
-            spi-max-frequency = <4000000>;  // 4MHz
+        nice_view: display@3c {
+            compatible = "zmk,nice-view";
+            reg = <0x3c>;
+            label = "NiceView";
         };
     };
 
