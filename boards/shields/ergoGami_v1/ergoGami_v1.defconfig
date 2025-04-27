@@ -1,0 +1,6 @@
+if SHEILD_ERGOGAMI_V1
+
+config ergoGami_v1
+    default "ergoGami_v1"
+
+endif

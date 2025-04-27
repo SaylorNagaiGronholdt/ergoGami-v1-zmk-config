@@ -7,6 +7,7 @@
         zmk,matrix_transform = &default_transform;
         zmk,display = &nice_view;
     };
+};
 
     // Keyboard matrix (6x4 left, 5x4 right)
     default_transform: keymap_transform_0 {
@@ -39,30 +40,28 @@
         >;
     };
 
-    &spi0 {
-        status = "okay";
-        sck-pin = <17>;    // SCK on P0.17
-        mosi-pin = <20>;   // MOSI on P0.20
-        cs-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;  // CS on P0.06
 
-        nice_view: nice_view@0 {
-            compatible = "nice,nice_view";
-            reg = <0>;
-            label = "NICE_VIEW";
-            width = <128>;
-            height = <32>;
-            spi-max-frequency = <4000000>;  // 4MHz
-        };
+    &i2c1 {
+        status = "okay";
+        sda-pin = <17>;
+        scl-pin = <20>;
+        cs-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
+        clock-frequency = <I2C_BITRATE_FAST>;
+
+        nice_view: display@3c {
+            compatible = "zmk,nice-view";
+            reg = <0x3c>;
+            label = "NiceView";
     };
 
-        nice_view_behavior: behavior_nice_view {
-            compatible = "zmk,behavior-nice-view";
-            #binding-cells = <0>;
-            display = <&nice_view>;
-            widgets = <
-                &layer_status
-                &battery_status
-                &output_status
-            >;
-        };
+    nice_view_behavior: behavior_nice_view {
+        compatible = "zmk,behavior-nice-view";
+        #binding-cells = <0>;
+        display = <&nice_view>;
+        widgets = <
+            &layer_status
+            &battery_status
+            &output_status
+        >;
+    };
 };
