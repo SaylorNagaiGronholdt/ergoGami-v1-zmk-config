@@ -80,16 +80,3 @@
         reg = <0x3c>;                 // Define I2C address
         label = "NiceView";           // Label the device
     };
-
-    // Behavior configuration (display nice view)
-    nice_view_behavior: behavior_nice_view {
-        compatible = "zmk,behavior-nice-view";
-        #binding-cells = <0>;
-        display = <&nice_view>;       // Link to the NiceView display
-        widgets = <
-            &layer_status
-            &battery_status
-            &output_status
-        >;  // Define the widgets for display
-    };
-};
