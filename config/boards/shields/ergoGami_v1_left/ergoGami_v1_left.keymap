@@ -37,11 +37,6 @@
 
         l2_layer {
             bindings = <
-                // Navigation layer (example)
-                &kp PG_UP &kp HOME &kp UP   &kp END  &kp INS  &kp NUM_LOCK
-                &kp PG_DN &kp LEFT &kp DOWN &kp RIGHT &kp DEL  &kp C_VOL_UP
-                &kp F1    &kp F2   &kp F3   &kp F4   &kp F5   &kp C_VOL_DN
-                &trans    &trans   &trans   &trans   &trans   &kp C_MUTE
             >;
             display-name = "NAV";
         };
