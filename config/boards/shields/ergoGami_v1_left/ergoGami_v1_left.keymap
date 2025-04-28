@@ -32,9 +32,6 @@
                 &kp A     &kp S     &kp D     &kp F     &kp G
                 &kp Z     &kp X     &kp C     &kp V     &kp B
                 &trans    &kp SPACE &trans    // &trans used correctly
-        >;
-
-
             >;
         };
 
