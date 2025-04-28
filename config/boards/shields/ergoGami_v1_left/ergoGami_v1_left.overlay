@@ -59,6 +59,24 @@
         >;
     };
 
+    layer_status: layer_status {
+        compatible = "zmk,layer-status";
+        status = "okay";
+        // Optionally, you can add properties for this widget (e.g., position, color, etc.)
+    };
+
+    battery_status: battery_status {
+        compatible = "zmk,battery-status";
+        status = "okay";
+        // Additional properties such as display format, color, etc. can be specified.
+    };
+
+    output_status: output_status {
+        compatible = "zmk,output-status";
+        status = "okay";
+        // Similar display properties can be added here.
+    };
+
     nice_view_behavior: behavior_nice_view {
         compatible = "zmk,behavior-nice-view"; // Define behavior for the NiceView
         #binding-cells = <0>;   // No binding cells needed for behavior
