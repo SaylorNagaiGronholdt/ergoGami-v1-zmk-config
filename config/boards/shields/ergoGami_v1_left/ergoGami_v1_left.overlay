@@ -1,14 +1,15 @@
-// Devicetree file
 #include <dt-bindings/zmk/matrix_transform.h>
 
+// GPIO configuration for the board
 &gpio0 {
     status = "okay";  // Ensure gpio0 is enabled
 };
 
 &gpio1 {
-    status = "okay";  // Ensure gpio1 is enabled
+    status = "okay";  // Ensure gpio1 is enabled (only defined once)
 };
 
+// I2C configuration for the display
 &i2c1 {
     status = "okay";  // Enable I2C interface
     sda-pin = <17>;    // Define SDA pin
@@ -26,6 +27,7 @@
     status = "okay";  // Ensure gpio1 is enabled
 };
 
+// Root node configuration
 / {
     chosen {
         zmk,kscan = &kscan0;           // Define key scan configuration
@@ -47,6 +49,7 @@
         >;
     };
 
+    // Keyscan GPIO configuration
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         
@@ -59,24 +62,37 @@
         >;
     };
 
+    // Widget for Layer Status
     layer_status: layer_status {
         compatible = "zmk,layer-status";
         status = "okay";
         // Optionally, you can add properties for this widget (e.g., position, color, etc.)
+        x = <0>;
+        y = <0>;
+        color = <0xFFFFFF>;  // White color for example
     };
 
+    // Widget for Battery Status
     battery_status: battery_status {
         compatible = "zmk,battery-status";
         status = "okay";
         // Additional properties such as display format, color, etc. can be specified.
+        x = <50>;
+        y = <0>;
+        color = <0xFF0000>;  // Red color as an example
     };
 
+    // Widget for Output Status
     output_status: output_status {
         compatible = "zmk,output-status";
         status = "okay";
         // Similar display properties can be added here.
+        x = <100>;
+        y = <0>;
+        color = <0x00FF00>;  // Green color as an example
     };
 
+    // NiceView behavior configuration
     nice_view_behavior: behavior_nice_view {
         compatible = "zmk,behavior-nice-view"; // Define behavior for the NiceView
         #binding-cells = <0>;   // No binding cells needed for behavior
