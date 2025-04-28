@@ -91,16 +91,4 @@
         y = <0>;
         color = <0x00FF00>;  // Green color as an example
     };
-
-    // NiceView behavior configuration
-    nice_view_behavior: behavior_nice_view {
-        compatible = "zmk,behavior-nice-view"; // Define behavior for the NiceView
-        #binding-cells = <0>;   // No binding cells needed for behavior
-        display = <&nice_view>; // Point to the NiceView display
-        widgets = <
-            &layer_status
-            &battery_status
-            &output_status
-        >; // Define the widgets for display
-    };
 };
