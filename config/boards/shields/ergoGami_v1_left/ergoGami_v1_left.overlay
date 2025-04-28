@@ -9,18 +9,35 @@
     status = "okay";  // Ensure gpio1 is enabled
 };
 
+&i2c1 {
+    status = "okay";  // Enable I2C interface
+    sda-pin = <17>;    // Define SDA pin
+    scl-pin = <20>;    // Define SCL pin
+    clock-frequency = <I2C_BITRATE_FAST>; // Define I2C speed
+
+    nice_view: display@3c {
+        compatible = "zmk,nice-view";  // Set compatible property
+        reg = <0x3c>;                 // Define I2C address
+        label = "NiceView";           // Label the device
+    };
+};
+
+&gpio1 {
+    status = "okay";  // Ensure gpio1 is enabled
+};
+
 / {
     chosen {
-        zmk,kscan = &kscan0;
+        zmk,kscan = &kscan0;           // Define key scan configuration
         zmk,matrix_transform = &default_transform;
-        zmk,display = &nice_view;
+        zmk,display = &nice_view;      // Point to the display device
     };
 
     // Keyboard matrix (6x4 left, 5x4 right)
     default_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
-        columns = <6>;  // Left half: 6 cols
-        rows = <4>;     // All rows
+        columns = <6>;  // Left half: 6 columns
+        rows = <4>;     // Define number of rows
         map = <
             // Left half (18 keys)
             RC(0,0) RC(0,1) RC(0,2) RC(0,3) RC(0,4) 
@@ -33,7 +50,7 @@
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         
-        diode-direction = "col2row";
+        diode-direction = "col2row";  // Set diode direction for the matrix
         row-gpios = <
             &gpio1 6  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)  // Row 0 (P1.06)
             &gpio1 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)  // Row 1 (P1.15)
@@ -42,28 +59,14 @@
         >;
     };
 
-    &i2c1 {
-        status = "okay";
-        sda-pin = <17>;
-        scl-pin = <20>;
-        clock-frequency = <I2C_BITRATE_FAST>;
-    
-        nice_view: display@3c {
-            compatible = "zmk,nice-view";
-            reg = <0x3c>;
-            label = "NiceView";
-        };
-    };
-    
-
     nice_view_behavior: behavior_nice_view {
-        compatible = "zmk,behavior-nice-view";
-        #binding-cells = <0>;
-        display = <&nice_view>;
+        compatible = "zmk,behavior-nice-view"; // Define behavior for the NiceView
+        #binding-cells = <0>;   // No binding cells needed for behavior
+        display = <&nice_view>; // Point to the NiceView display
         widgets = <
             &layer_status
             &battery_status
             &output_status
-        >;
+        >; // Define the widgets for display
     };
 };
