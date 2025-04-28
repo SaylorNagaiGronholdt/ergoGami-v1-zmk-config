@@ -1,4 +1,4 @@
 build:
   settings:
     board_root: .
-name: ergoGami_v1
+name: zmk-keyboard-ergoGami_v1
