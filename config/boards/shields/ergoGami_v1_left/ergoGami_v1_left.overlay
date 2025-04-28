@@ -48,7 +48,6 @@
     layer_status: layer_status {
         compatible = "zmk,layer-status";
         status = "okay";
-        // Optionally, you can add properties for this widget (e.g., position, color, etc.)
         x = <0>;
         y = <0>;
         color = <0xFFFFFF>;  // White color for example
@@ -58,7 +57,6 @@
     battery_status: battery_status {
         compatible = "zmk,battery-status";
         status = "okay";
-        // Additional properties such as display format, color, etc. can be specified.
         x = <50>;
         y = <0>;
         color = <0xFF0000>;  // Red color as an example
@@ -68,7 +66,6 @@
     output_status: output_status {
         compatible = "zmk,output-status";
         status = "okay";
-        // Similar display properties can be added here.
         x = <100>;
         y = <0>;
         color = <0x00FF00>;  // Green color as an example
@@ -77,6 +74,19 @@
     // Nice View Configuration (for display behavior)
     nice_view: display@3c {
         compatible = "zmk,nice-view";
-        reg = <0x3c>;                 // Define I2C address
+        reg = <0x3c 0>;                 // Define I2C address
         label = "NiceView";           // Label the device
     };
+
+    // Behavior configuration (display nice view)
+    nice_view_behavior: behavior_nice_view {
+        compatible = "zmk,behavior-nice-view";
+        #binding-cells = <0>;
+        display = <&nice_view>;       // Link to the NiceView display
+        widgets = <
+            &layer_status
+            &battery_status
+            &output_status
+        >;  // Define the widgets for display
+    };
+};
