@@ -20,7 +20,7 @@
 
         nice_view_behavior: behavior_nice_view {
             compatible = "zmk,behavior-nice-view";
-            #binding-cells = <1>;
+            #binding-cells = <0>;
             display = <&nice_view>;
             widgets = <
                 &layer_status
