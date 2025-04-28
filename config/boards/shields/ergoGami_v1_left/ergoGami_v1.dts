@@ -1,0 +1,14 @@
+// Board devicetree file (e.g., nice_nano_v2.dts)
+
+&i2c1 {
+    status = "okay";
+    sda-pin = <17>;
+    scl-pin = <20>;
+    clock-frequency = <I2C_BITRATE_FAST>;
+
+    nice_view: display@3c {
+        compatible = "zmk,nice-view";
+        reg = <0x3c>;
+        label = "NiceView";
+    };
+};
