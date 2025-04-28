@@ -77,12 +77,12 @@
         sda-pin = <17>;
         scl-pin = <20>;
         clock-frequency = <I2C_BITRATE_FAST>;
-
-            // Nice View Configuration (for display behavior)
-            nice_view: display@3c {
-                compatible = "zmk,nice-view";
-                reg = <0x3c>;
-                label = "NiceView";
+    
+        // Nice View Configuration (for display behavior)
+        nice_view: display@3c {
+            compatible = "zmk,nice-view";
+            reg = <0x3c>;
+            label = "NiceView";
         };
     };
 };
